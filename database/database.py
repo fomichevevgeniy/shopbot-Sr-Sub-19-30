@@ -78,3 +78,34 @@ class DataBase:
         SELECT * FROM filials WHERE filial_name = ?
         '''
         return self.manager(sql, filial_name, fetchone=True)
+
+
+    def create_categories_table(self):
+        sql = '''
+        CREATE TABLE IF NOT EXISTS categories(
+            category_id INTEGER PRIMARY KEY AUTOINCREMENT,
+            category_title VARCHAR(50) UNIQUE
+        )
+        '''
+        self.manager(sql, commit=True)
+
+    def insert_categories(self):
+        sql = '''
+        INSERT INTO categories(category_title) VALUES
+        ('🍖 Шашлыки'),
+        ('🦈 Блюда с рыбой'),
+        ('🥙 Сэндвичи и Лаваши'),
+        ('🌭 Хот-доги'),
+        ('🥗 Салаты'),
+        ('🍔 Бургеры')
+        '''
+        self.manager(sql, commit=True)
+
+
+    def get_categories(self):
+        sql = '''
+        SELECT category_title FROM categories
+        '''
+        return self.manager(sql, fetchall=True)
+
+

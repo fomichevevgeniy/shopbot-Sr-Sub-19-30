@@ -37,3 +37,22 @@ def generate_filials_buttons():
     return markup
 
 
+
+def generate_categories():
+    markup = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    back_btn = KeyboardButton(text='◀ К филиалам')
+    cart = KeyboardButton(text='🛒 Корзина')
+    main_btn = KeyboardButton(text='🏠 Главное меню')
+    categories = [i[0] for i in db.get_categories()]
+    buttons = []
+    for category in categories:
+        btn = KeyboardButton(text=category)
+        buttons.append(btn)
+    markup.add(back_btn, cart, *buttons, main_btn)
+    return markup
+
+
+
+
+
+

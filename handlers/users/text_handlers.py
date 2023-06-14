@@ -3,7 +3,9 @@ from data.loader import bot, dp, db
 from aiogram.dispatcher import FSMContext
 from states.states import NumberState
 import re
-from keyboards.reply import generate_main_menu, generate_delivery_types, generate_filials_buttons
+from keyboards.reply import generate_main_menu, generate_delivery_types, \
+    generate_filials_buttons,\
+    generate_categories
 
 
 async def start_register(message: Message, state=None):
@@ -50,7 +52,23 @@ async def show_filials(message: Message):
 
 filials = [i[0] for i in db.get_filials_names()]
 
-
+#  🏠 Афросиаб
 @dp.message_handler(lambda message: message.text in filials)
 async def show_menu(message: Message):
-    await message.answer('Выберите категорию')
+    await message.answer('Выберите категорию', reply_markup=generate_categories())
+
+# Сделать вывод категорий
+# Создать базу категорий
+# Сделать кнопки категорий
+# Сделать отправку категорий
+# Подумать над будущем выводе товаров
+
+
+'''
+Сделать реакцию на кнопку Информация
+Показать кнопки
+Там есть кнопка Филиалы.
+Сделать реакцию на кнопку Филиалы и показывать список филиалов с домиками 🏠малика
+Чтобы не было конфликтов реакций
+Сделать реакцию на филиал с домиком и отправлять полную информацию о филиале
+'''
